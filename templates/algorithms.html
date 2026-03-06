@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Model Accuracies | Admin</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap');
+        *{margin:0;padding:0;box-sizing:border-box;font-family:'Roboto',sans-serif;}
+
+        body{
+            background:url("/static/images/about3.jpg");
+            background-size:cover;
+            background-attachment:fixed;
+            min-height:100vh;
+        }
+
+        .navbar{
+            width:100%;
+            background:#fff;
+            padding:18px 60px;
+            display:flex;
+            justify-content:space-between;
+            align-items:center;
+            box-shadow:0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .brand{
+            font-size:22px;
+            font-weight:700;
+            color:#6a0dad;
+        }
+
+        .nav-btn{
+            padding:10px 22px;
+            border-radius:6px;
+            border:none;
+            background:#ff8c00;
+            color:white;
+            font-weight:600;
+            cursor:pointer;
+        }
+
+        .nav-btn:hover{background:#e67e00;}
+
+        .right-menu-icon{
+            position:fixed;top:22px;right:25px;width:32px;
+            display:flex;flex-direction:column;gap:6px;z-index:1000;
+        }
+        .right-menu-icon span{
+            height:3px;width:100%;background:#6a0dad;border-radius:2px;
+        }
+
+        .right-side-menu{
+            position:fixed;right:-280px;top:0;width:260px;height:100vh;
+            background:#fff;box-shadow:-6px 0 20px rgba(0,0,0,0.2);
+            padding:30px 20px;transition:0.4s;z-index:1200;
+        }
+        .right-side-menu.active{right:0;}
+        .right-side-menu button{
+            width:100%;padding:12px;margin-bottom:12px;
+            border:none;border-radius:6px;background:#f5f0ff;
+            color:#6a0dad;font-weight:600;
+        }
+
+        .result-card{
+            max-width:850px;
+            margin:90px auto;
+            background:rgba(255,255,255,0.95);
+            padding:40px;
+            border-radius:14px;
+            text-align:center;
+        }
+
+        table{
+            width:100%;
+            border-collapse:collapse;
+            margin-top:20px;
+        }
+
+        th,td{
+            border:1px solid #ddd;
+            padding:14px;
+            text-align:center;
+        }
+
+        th{background:#6a0dad;color:white;}
+
+        .best-box{
+            background:#d4edda;
+            color:#155724;
+            padding:15px;
+            border-radius:6px;
+            margin-top:20px;
+            font-weight:600;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="navbar">
+    <div class="brand">Enhancing Fraud Detection in Banking Transactions Using Deep Learning</div>
+    <div>
+        <a href="{{ url_for('admin_upload_dataset') }}"><button class="nav-btn" >Upload Dataset</button></a>
+    <a href="{{ url_for('admin_split_dataset') }}"><button class="nav-btn" >Split Dataset</button></a>
+    <a href="{{ url_for('admin_train_models') }}"><button class="nav-btn">Train Model</button></a>
+    <a href="{{ url_for('admin_reports') }}"><button class="nav-btn">Comparison Graph</button></a>
+   
+        <a href="{{ url_for('logout') }}"><button class="nav-btn">Logout</button></a>
+    </div>
+</div>
+
+<div class="right-menu-icon" onclick="toggleMenu()">
+    <span></span><span></span><span></span>
+</div>
+
+<div class="right-side-menu" id="menu">
+    <a href="{{ url_for('admin_upload_dataset') }}"><button>Upload Dataset</button></a>
+    <a href="{{ url_for('admin_split_dataset') }}"><button>Split Dataset</button></a>
+    <a href="{{ url_for('admin_train_models') }}"><button>Train Models</button></a>
+    <a href="{{ url_for('admin_reports') }}"><button>Comparison Graph</button></a>
+    <a href="{{ url_for('logout') }}"><button>Logout</button></a>
+</div>
+
+<div class="result-card">
+    <h2 style="color:#6a0dad;">Algorithm Accuracy Comparison</h2>
+
+    <table>
+        <tr>
+            <th>Algorithm</th>
+            <th>Accuracy (%)</th>
+        </tr>
+        {% for name,acc in accuracies.items() %}
+        <tr>
+            <td>{{ name }}</td>
+            <td>{{ acc }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    <div class="best-box">
+        ✅ Best Model: <b>{{ best_model }}</b>  
+        ✅ Accuracy: <b>{{ best_acc }}%</b>
+    </div>
+</div>
+
+<script>
+function toggleMenu(){
+    document.getElementById("menu").classList.toggle("active");
+}
+</script>
+
+</body>
+</html>

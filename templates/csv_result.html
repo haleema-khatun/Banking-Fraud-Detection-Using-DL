@@ -1,0 +1,11 @@
+<!DOCTYPE html>
+<html>
+<head><title>CSV Results</title></head>
+<body style="text-align:center;">
+<h2>CSV Prediction Summary</h2>
+<p>Total Transactions: {{ total }}</p>
+<p>Predicted Fraud Transactions: {{ fraud_count }}</p>
+<p>Output file saved as: {{ file_name }}</p>
+<a href="{{ url_for('user_home') }}"><button>Home</button></a>
+</body>
+</html>

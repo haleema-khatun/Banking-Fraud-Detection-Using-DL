@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin Reports | Bank Fraud Detection System</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- ✅ Chart JS -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2"></script>
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Roboto', sans-serif;
+        }
+
+        body {
+            background: url("/static/images/about3.jpg");
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            min-height: 100vh;
+        }
+
+        /* ================= NAVBAR ================= */
+        .navbar {
+            width: 100%;
+            background: #ffffff;
+            padding: 18px 60px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.08);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .brand {
+            font-size: 22px;
+            font-weight: 700;
+            color: #6a0dad;
+        }
+
+        .nav-actions a {
+            text-decoration: none;
+            margin-left: 15px;
+        }
+
+        .nav-btn {
+            padding: 10px 22px;
+            border-radius: 6px;
+            border: none;
+            background: #ff8c00;
+            color: white;
+            font-weight: 500;
+            cursor: pointer;
+        }
+
+        .nav-btn:hover {
+            background: #e67e00;
+        }
+
+        /* ================= RIGHT MENU ICON ================= */
+        .right-menu-icon {
+            position: fixed;
+            top: 22px;
+            right: 25px;
+            width: 32px;
+            cursor: pointer;
+            z-index: 1100;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .right-menu-icon span {
+            height: 3px;
+            width: 100%;
+            background: #6a0dad;
+            border-radius: 2px;
+        }
+
+        /* ================= SLIDE MENU ================= */
+        .right-side-menu {
+            position: fixed;
+            top: 0;
+            right: -280px;
+            width: 260px;
+            height: 100vh;
+            background: #ffffff;
+            box-shadow: -6px 0 20px rgba(0,0,0,0.2);
+            padding: 30px 20px;
+            transition: 0.4s ease;
+            z-index: 1200;
+        }
+
+        .right-side-menu.active {
+            right: 0;
+        }
+
+        .right-side-menu h3 {
+            color: #6a0dad;
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        .right-side-menu a {
+            display: block;
+            margin-bottom: 15px;
+        }
+
+        .right-side-menu button {
+            width: 92%;
+            padding: 12px;
+            margin-left: 6px;
+            border-radius: 6px;
+            border: none;
+            background: #f5f0ff;
+            color: #6a0dad;
+            font-weight: 600;
+            cursor: pointer;
+            text-align: left;
+            padding-left: 18px;
+        }
+
+        .right-side-menu button:hover {
+            background: #6a0dad;
+            color: #fff;
+        }
+
+        .close-right {
+            background: #ff8c00 !important;
+            color: #fff !important;
+            margin-top: 25px;
+        }
+
+        /* ================= REPORT CONTENT ================= */
+        .admin-content {
+            max-width: 1100px;
+            margin: 80px auto 40px;
+            padding: 40px;
+            background: rgba(255, 255, 255, 0.92);
+            border-radius: 14px;
+            box-shadow: 0 12px 30px rgba(0,0,0,0.15);
+            text-align: center;
+        }
+
+        .admin-content h1 {
+            color: #6a0dad;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            font-size: 16px;
+            color: #555;
+            margin-bottom: 25px;
+        }
+
+        .charts-wrapper {
+            margin-top: 30px;
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            gap: 25px;
+        }
+
+        .chart-box {
+            background: #ffffff;
+            padding: 20px;
+            border-radius: 12px;
+            width: 45%;
+            box-shadow: 0 8px 18px rgba(0,0,0,0.15);
+        }
+
+        .chart-box h4 {
+            color: #6a0dad;
+            margin-bottom: 10px;
+        }
+
+        @media(max-width: 768px) {
+            .navbar {
+                padding: 15px 25px;
+            }
+            .chart-box {
+                width: 95%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<!-- ✅ NAVBAR -->
+<div class="navbar">
+    <div class="brand">Enhancing Fraud Detection in Banking Transactions Using Deep Learning</div>
+    <div class="nav-actions">
+        <a href="{{ url_for('admin_upload_dataset') }}"><button class="nav-btn">Upload Dataset</button></a>
+        <a href="{{ url_for('admin_split_dataset') }}"><button class="nav-btn">Split Dataset</button></a>
+        <a href="{{ url_for('admin_train_models') }}"><button class="nav-btn">Train Model</button></a>
+        <a href="{{ url_for('admin_reports') }}"><button class="nav-btn">Comparison Graph</button></a>
+        <a href="{{ url_for('logout') }}"><button class="nav-btn">Logout</button></a>
+    </div>
+</div>
+
+<!-- ✅ RIGHT MENU ICON -->
+<div class="right-menu-icon" onclick="toggleRightMenu()">
+    <span></span>
+    <span></span>
+    <span></span>
+</div>
+
+<!-- ✅ RIGHT SIDE MENU -->
+<div class="right-side-menu" id="rightMenu">
+    <h3>Quick Menu</h3>
+    <a href="{{ url_for('admin_upload_dataset') }}"><button>Upload Dataset</button></a>
+    <a href="{{ url_for('admin_split_dataset') }}"><button>Split Dataset</button></a>
+    <a href="{{ url_for('admin_train_models') }}"><button>Train Model</button></a>
+    <a href="{{ url_for('admin_reports') }}"><button>Comparison Graph</button></a>
+    <a href="{{ url_for('logout') }}"><button>Logout</button></a>
+    <button class="close-right" onclick="toggleRightMenu()">Close</button>
+</div>
+
+<!-- ✅ MAIN REPORT CONTENT -->
+<div class="admin-content">
+    <h1>Model Accuracy Reports</h1>
+    <p class="subtitle">Best Model: <b>{{ best_model }}</b> ({{ best_acc }}%)</p>
+
+    <div class="charts-wrapper">
+        <div class="chart-box">
+            <h4>Bar Chart</h4>
+            <canvas id="barChart"></canvas>
+        </div>
+
+        <div class="chart-box" style="width:30%;">
+            <h4>Pie Chart</h4>
+            <canvas id="pieChart" height="180"></canvas>
+        </div>
+    </div>
+</div>
+
+<!-- ✅ JS -->
+<script>
+function toggleRightMenu() {
+    document.getElementById("rightMenu").classList.toggle("active");
+}
+
+const labels = {{ accuracies.keys() | list | tojson }};
+const values = {{ accuracies.values() | list | tojson }};
+
+// ✅ BAR CHART
+new Chart(document.getElementById("barChart"), {
+    type: "bar",
+    data: {
+        labels: labels,
+        datasets: [{
+            label: "Accuracy (%)",
+            data: values,
+            borderWidth: 1
+        }]
+    }
+});
+
+// ✅ PIE CHART WITH PERCENTAGE
+new Chart(document.getElementById("pieChart"), {
+    type: "pie",
+    data: {
+        labels: labels,
+        datasets: [{
+            data: values
+        }]
+    },
+    plugins: [ChartDataLabels],
+    options: {
+        plugins: {
+            datalabels: {
+                formatter: (value, ctx) => {
+                    let total = ctx.chart.data.datasets[0].data.reduce((a, b) => a + b, 0);
+                    return ((value / total) * 100).toFixed(1) + "%";
+                },
+                color: "#000",
+                font: { weight: "bold", size: 12 }
+            }
+        }
+    }
+});
+</script>
+
+</body>
+</html>

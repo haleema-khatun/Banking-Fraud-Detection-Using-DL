@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Prediction Result</title>
+    <style>
+        body {
+            font-family: Arial;
+            background: #f4f6f9;
+            text-align: center;
+            padding: 60px;
+        }
+
+        .card {
+            max-width: 600px;
+            margin: auto;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            background: white;
+        }
+
+        .danger {
+            color: #cc0000;
+        }
+
+        .success {
+            color: green;
+        }
+
+        .prevention-box {
+            margin-top: 20px;
+            padding: 20px;
+            border-radius: 8px;
+            background: #fff3cd;
+        }
+
+        .btn {
+            margin-top: 25px;
+            padding: 12px 25px;
+            border-radius: 6px;
+            border: none;
+            background: #6a0dad;
+            color: white;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="card">
+
+    <!-- Prediction Result -->
+    <h2 class="{{ alert_type }}">
+        {{ prediction }}
+    </h2>
+
+    <p><strong>Confidence:</strong> {{ confidence }}%</p>
+
+    <!-- Prevention Message -->
+    <div class="prevention-box">
+        <p>{{ prevention }}</p>
+    </div>
+
+    <a href="{{ url_for('user_predict') }}">
+        <button class="btn">Predict Another Transaction</button>
+    </a>
+
+</div>
+
+</body>
+</html>
