@@ -1,7 +1,3 @@
-Below is a **modern, portfolio-level `README.md`** you can directly paste into your repository.
-It includes **banner style header, badges, clean sections, visuals placeholders, GitHub stats, and a professional structure** often seen in strong ML portfolios.
-
----
 
 ```markdown
 <!-- PROJECT HEADER -->
