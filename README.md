@@ -60,3 +60,89 @@ Banking-Fraud-Detection-Using-DL
 ├── requirements.txt
 ├── README.md
 └── main.py     
+
+---
+
+# ⚙️ Installation
+
+Clone the repository:
+
+```bash
+git clone https://github.com/haleema-khatun/Banking-Fraud-Detection-Using-DL.git
+cd Banking-Fraud-Detection-Using-DL
+
+Install required dependencies:
+
+pip install -r requirements.txt
+
+📊 Workflow
+
+The fraud detection system follows these steps:
+
+1️⃣ Data Collection
+2️⃣ Data Preprocessing
+3️⃣ Exploratory Data Analysis (EDA)
+4️⃣ Feature Engineering
+5️⃣ Model Training (Deep Learning)
+6️⃣ Model Evaluation
+7️⃣ Fraud Prediction
+
+📈 Model Evaluation Metrics
+
+The model performance is evaluated using:
+
+Accuracy
+
+Precision
+
+Recall
+
+F1-Score
+
+Confusion Matrix
+
+ROC-AUC Score
+
+These metrics help determine how well the model detects fraudulent transactions while minimizing false positives.
+
+📊 Sample Output
+
+Example prediction:
+
+Transaction Amount: $12,500
+Prediction: Fraudulent Transaction 🚨
+🔮 Future Improvements
+
+✔ Real-time fraud detection system
+✔ API deployment using FastAPI / Flask
+✔ Integration with banking transaction streams
+✔ Advanced models like LSTM or Graph Neural Networks
+✔ Dashboard for fraud monitoring
+
+🤝 Contributing
+
+Contributions are welcome!
+
+If you would like to improve this project:
+
+Fork the repository
+
+Create a new branch
+
+Commit your changes
+
+Submit a Pull Request
+
+
+📌 GitHub:
+https://github.com/haleema-khatun
+
+⭐ Support
+
+If you found this project useful, please give it a star ⭐ on GitHub!
+
+It helps others discover the project and motivates further improvements.
+
+📜 License
+
+This project is licensed under the MIT License
