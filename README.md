@@ -1,5 +1,4 @@
 
-```markdown
 <!-- PROJECT HEADER -->
 <h1 align="center">🏦 Banking Fraud Detection Using Deep Learning</h1>
 
