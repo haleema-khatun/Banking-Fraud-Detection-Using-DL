@@ -112,14 +112,6 @@ Key insights discovered during EDA:
 - Correlation between transaction features
 - Outlier detection
 
-*(You can add graphs inside `/images` and display them here)*
-
-Example:
-
-```markdown
-![Fraud Distribution](images/fraud_distribution.png)
-````
-
 ---
 
 # 🤖 Model Architecture
@@ -222,17 +214,6 @@ GitHub:
 
 ---
 
-# 📊 GitHub Stats
-
-<p align="center">
-<img src="https://github-readme-stats.vercel.app/api?username=haleema-khatun&show_icons=true&theme=tokyonight">
-</p>
-
-<p align="center">
-<img src="https://github-readme-streak-stats.herokuapp.com/?user=haleema-khatun&theme=tokyonight">
-</p>
-
----
 
 # ⭐ Support
 
