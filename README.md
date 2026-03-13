@@ -223,9 +223,3 @@ It helps the project reach more developers and researchers.
 
 ---
 
-# 📜 License
-
-This project is licensed under the **MIT License**
-
-```
-
